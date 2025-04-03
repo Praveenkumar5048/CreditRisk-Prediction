@@ -2,6 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 import pickle
+import traceback
 from flask import Flask, request, render_template, jsonify, send_file
 from flask_cors import CORS
 
@@ -73,7 +74,7 @@ def analyze_data():
             
         # Preprocess input data
         processed_data = preprocess_input(input_data)
-        
+
         # Make prediction
         prediction = model.predict(processed_data)
         probability = model.predict_proba(processed_data)
