@@ -15,6 +15,10 @@
 - `loan_intent`
 - `loan_status`
 
+## The application is deployed 
+
+https://vercel.com/praveen-kumars-projects-a755998b/credit-risk-prediction
+
 ## Running the Project
 
 ### Frontend Setup
