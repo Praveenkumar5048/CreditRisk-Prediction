@@ -78,7 +78,7 @@ def analyze_data():
         # Make prediction
         prediction = model.predict(processed_data)
         probability = model.predict_proba(processed_data)
-        
+
         # Return results
         result = {
             "prediction": "Rejected" if prediction[0] == 1 else "Approved",

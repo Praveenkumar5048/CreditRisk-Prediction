@@ -20,7 +20,7 @@ export default function PredictionForm({ onSubmit, isLoading }) {
     const { name, value, type } = e.target;
     setFormData({
       ...formData,
-      [name]: type === "number" && value !== "" ? Number(value) : value
+      [name]: type === "number" || ["loan_grade", "cb_person_default_on_file"].includes(name) ? Number(value) : value
     });
   };
 
