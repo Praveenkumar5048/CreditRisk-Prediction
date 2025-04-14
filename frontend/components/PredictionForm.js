@@ -1,21 +1,7 @@
 import { useState } from 'react';
 
-export default function PredictionForm({ onSubmit, isLoading }) {
+export default function PredictionForm({ onSubmit, isLoading, setFormData, formData }) {
   
-  const [formData, setFormData] = useState({
-    person_age: "",
-    person_income: "",
-    person_emp_length: "",
-    loan_grade: 0,
-    loan_amnt: "",
-    loan_int_rate: "",
-    loan_percent_income: null,
-    cb_person_default_on_file: 0,
-    cb_person_cred_hist_length: "",
-    person_home_ownership: "OWN",
-    loan_intent: "MEDICAL"
-  });
-
   const handleChange = (e) => {
     const { name, value, type } = e.target;
     setFormData({

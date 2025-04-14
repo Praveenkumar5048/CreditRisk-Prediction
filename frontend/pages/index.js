@@ -9,6 +9,20 @@ export default function Home() {
   const [showForm, setShowForm] = useState(false);
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  
+  const [formData, setFormData] = useState({
+    person_age: "",
+    person_income: "",
+    person_emp_length: "",
+    loan_grade: 0,
+    loan_amnt: "",
+    loan_int_rate: "",
+    loan_percent_income: null,
+    cb_person_default_on_file: 0,
+    cb_person_cred_hist_length: "",
+    person_home_ownership: "OWN",
+    loan_intent: "MEDICAL"
+  });
 
   const handleSubmit = async (formData) => {
     setIsLoading(true);
@@ -53,7 +67,7 @@ export default function Home() {
         )}
 
         {showForm && !result && (
-          <PredictionForm onSubmit={handleSubmit} isLoading={isLoading} />
+          <PredictionForm onSubmit={handleSubmit} isLoading={isLoading} setFormData={setFormData} formData={formData}/>
         )}
 
         {result && (

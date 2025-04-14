@@ -11,20 +11,19 @@ app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
 # Function to load a pickle file
-def load_pickle_model():
+def load_pickle_model(model_filename):
     try:
-        with open("loan_xgboost3.pkl", "rb") as f:
+        with open(model_filename, "rb") as f:
             model = pickle.load(f)
-        print(f"✅ Successfully Loaded model")
+        print(f"✅ Successfully Loaded model from '{model_filename}'")
         return model
     except FileNotFoundError:
-        print(f"❌ File not found")
+        print(f"❌ File not found: '{model_filename}'")
     except pickle.UnpicklingError as e:
-        print(f"❌ Unpickling error: {e}")
+        print(f"❌ Unpickling error in '{model_filename}': {e}")
     except Exception as e:
-        print(f"❌ Unexpected error loading model:\n{traceback.format_exc()}")
+        print(f"❌ Unexpected error loading model '{model_filename}':\n{traceback.format_exc()}")
     return None
-
 def preprocess_input(input_data):
 
     input_df = pd.DataFrame([input_data])
@@ -59,36 +58,50 @@ def home():
 
 @app.route('/analyze', methods=['POST'])
 def analyze_data():
-    # Load the model
-    model = load_pickle_model()
+    # Load the main loan status model
+    model = load_pickle_model("loan_xgboost3.pkl")
     if model is None:
         return jsonify({"error": "Failed to load model"}), 500
-    
-    # Get input data from request
+
     try:
         input_data = request.json
-        
+
         # Calculate loan_percent_income if not provided
         if input_data.get("loan_percent_income") is None:
             input_data["loan_percent_income"] = input_data["loan_amnt"] / input_data["person_income"]
-            
-        # Preprocess input data
+
+        # Preprocess input data (including one-hot encoding, etc.)
         processed_data = preprocess_input(input_data)
 
-        # Make prediction
+        # Predict loan status
         prediction = model.predict(processed_data)
         probability = model.predict_proba(processed_data)
 
-        # Return results
         result = {
             "prediction": "Rejected" if prediction[0] == 1 else "Approved",
             "probability": float(probability[0][1]),  # Probability of default (class 1)
+            "optimized_loan_amnt": None
         }
-        
+
+        # If rejected, predict optimized loan amount
+        if prediction[0] == 1:
+            
+            opt_model = load_pickle_model("xgb_loan_optimizer.pkl")
+
+            # Remove 'loan_amnt' from processed data and use the rest for prediction
+            processed_without_loan_amnt = processed_data.drop(columns=["loan_amnt"], errors="ignore")
+
+            # Predict optimized loan amount
+            optimized_amt = opt_model.predict(processed_without_loan_amnt)[0]
+
+            # Add to response
+            result["optimized_loan_amnt"] = int(round(optimized_amt))
+
         return jsonify(result)
-    
+
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
