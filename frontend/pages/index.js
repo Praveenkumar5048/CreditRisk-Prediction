@@ -32,7 +32,8 @@ export default function Home() {
       
       const apiResult = {
         prediction: response.data.prediction,
-        probability: response.data.probability
+        probability: response.data.probability,
+        optimized_loan_amnt: response.data.optimized_loan_amnt
       };
       
       setResult(apiResult);

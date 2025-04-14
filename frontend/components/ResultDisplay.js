@@ -1,5 +1,6 @@
 export default function ResultDisplay({ result }) {
   const { prediction, probability, optimized_loan_amnt } = result;
+  console.log(result)
   const isPredictionApproved = prediction === "Approved";
   const probabilityPercentage = isPredictionApproved
     ? ((1 - probability) * 100).toFixed(2) + "%"
