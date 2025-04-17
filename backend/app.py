@@ -89,7 +89,7 @@ def analyze_data():
             opt_model = load_pickle_model("xgb_loan_optimizer.pkl")
 
             # Remove 'loan_amnt' from processed data and use the rest for prediction
-            processed_without_loan_amnt = processed_data.drop(columns=["loan_amnt"], errors="ignore")
+            processed_without_loan_amnt = processed_data.drop(columns=["loan_amnt", "loan_percent_income"], errors="ignore")
 
             # Predict optimized loan amount
             optimized_amt = opt_model.predict(processed_without_loan_amnt)[0]
