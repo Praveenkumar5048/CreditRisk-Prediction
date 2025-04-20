@@ -99,7 +99,7 @@ def analyze_data():
             optimized_amt = opt_model.predict(processed_data)[0]
 
             # Add to response
-            result["optimized_loan_amnt"] = int(round(optimized_amt))
+            result["optimized_loan_amnt"] = max(int(round(optimized_amt)), 200)
 
         return jsonify(result)
 
