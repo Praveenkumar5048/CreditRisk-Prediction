@@ -2,6 +2,7 @@ import os
 import numpy as np
 import pandas as pd
 import pickle
+from xgboost import DMatrix
 import traceback
 from flask import Flask, request, render_template, jsonify, send_file
 from flask_cors import CORS
@@ -73,7 +74,7 @@ def analyze_data():
         # Preprocess input data (including one-hot encoding, etc.)
         processed_data = preprocess_input(input_data)
 
-        # Predict loan status
+        # Use regular DataFrame for first model (no DMatrix needed)
         prediction = model.predict(processed_data)
         probability = model.predict_proba(processed_data)
 
@@ -86,13 +87,16 @@ def analyze_data():
         # If rejected, predict optimized loan amount
         if prediction[0] == 1:
             
-            opt_model = load_pickle_model("xgb_loan_optimizer.pkl")
+            opt_model = load_pickle_model("xgb_loanAmountModel_withLoan.pkl")
 
             # Remove 'loan_amnt' from processed data and use the rest for prediction
-            processed_without_loan_amnt = processed_data.drop(columns=["loan_amnt", "loan_percent_income"], errors="ignore")
-
+            # processed_without_loan_amnt = processed_data.drop(columns=["loan_amnt", "loan_percent_income"], errors="ignore")
+            
+            # Create DMatrix only for the optimization model
+            # dmatrix_without_loan = DMatrix(processed_without_loan_amnt)
+            
             # Predict optimized loan amount
-            optimized_amt = opt_model.predict(processed_without_loan_amnt)[0]
+            optimized_amt = opt_model.predict(processed_data)[0]
 
             # Add to response
             result["optimized_loan_amnt"] = int(round(optimized_amt))
@@ -100,8 +104,8 @@ def analyze_data():
         return jsonify(result)
 
     except Exception as e:
+        print(e)
         return jsonify({"error": str(e)}), 400
-
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

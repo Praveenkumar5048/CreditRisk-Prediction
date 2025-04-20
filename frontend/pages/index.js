@@ -27,8 +27,8 @@ export default function Home() {
   const handleSubmit = async (formData) => {
     setIsLoading(true);
     try {
-      
-      const response = await axios.post("https://creditrisk-prediction.onrender.com/analyze", formData);
+      //"https://creditrisk-prediction.onrender.com/analyze
+      const response = await axios.post(" http://127.0.0.1:5000/analyze", formData);
       
       const apiResult = {
         prediction: response.data.prediction,
@@ -104,3 +104,4 @@ export default function Home() {
     </div>
   );
 }
+
