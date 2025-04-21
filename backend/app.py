@@ -87,16 +87,16 @@ def analyze_data():
         # If rejected, predict optimized loan amount
         if prediction[0] == 1:
             
-            opt_model = load_pickle_model("xgb_loanAmountModel_withLoan.pkl")
+            opt_model = load_pickle_model("xgb_loanAmountModel_custom.pkl")
 
             # Remove 'loan_amnt' from processed data and use the rest for prediction
             # processed_without_loan_amnt = processed_data.drop(columns=["loan_amnt", "loan_percent_income"], errors="ignore")
             
             # Create DMatrix only for the optimization model
-            # dmatrix_without_loan = DMatrix(processed_without_loan_amnt)
+            dmatrix_data = DMatrix(processed_data)
             
             # Predict optimized loan amount
-            optimized_amt = opt_model.predict(processed_data)[0]
+            optimized_amt = opt_model.predict(dmatrix_data)[0]
 
             # Add to response
             result["optimized_loan_amnt"] = max(int(round(optimized_amt)), 200)
