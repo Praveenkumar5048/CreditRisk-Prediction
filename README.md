@@ -47,8 +47,8 @@ This project implements a robust machine learning framework for credit risk asse
 
 ## 🔍 Dataset
 
-The project uses the "Credit Risk Dataset" from Kaggle, which contains 32,581 records with 12 variables including:
-
+- The project uses the [Credit Risk Dataset](https://www.kaggle.com/datasets/laotse/credit-risk-dataset) from Kaggle, which contains 32,581 records with 12 columns. You can also find it in the Datasets folder.
+- We created our own Adjusted amount dataset that is used to train our regression model to find the adjusted loan amount if the person is predicted as risky for the laon amount requested by him. This dataset can also be found in the Datasets folder
 
 ## 🚀 Installation and Setup
 
