@@ -46,8 +46,7 @@ export default function ResultDisplay({ result }) {
         <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200 text-sm text-gray-700">
           <p>
             <strong>Disclaimer:</strong> This is only a prediction based on the
-            provided data and the underlying machine learning model. Please do
-            not consider this as an actual loan approval status. Consult with
+            provided data and the underlying machine learning model. Consult with
             financial advisors for making real financial decisions.
           </p>
         </div>

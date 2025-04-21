@@ -2,7 +2,6 @@ import os
 import numpy as np
 import pandas as pd
 import pickle
-from xgboost import DMatrix
 import traceback
 from flask import Flask, request, render_template, jsonify, send_file
 from flask_cors import CORS
@@ -60,7 +59,7 @@ def home():
 @app.route('/analyze', methods=['POST'])
 def analyze_data():
     # Load the main loan status model
-    model = load_pickle_model("loan_xgboost3.pkl")
+    model = load_pickle_model("xgb_creditRisk.pkl")
     if model is None:
         return jsonify({"error": "Failed to load model"}), 500
 
@@ -87,16 +86,10 @@ def analyze_data():
         # If rejected, predict optimized loan amount
         if prediction[0] == 1:
             
-            opt_model = load_pickle_model("xgb_loanAmountModel_custom.pkl")
-
-            # Remove 'loan_amnt' from processed data and use the rest for prediction
-            # processed_without_loan_amnt = processed_data.drop(columns=["loan_amnt", "loan_percent_income"], errors="ignore")
-            
-            # Create DMatrix only for the optimization model
-            dmatrix_data = DMatrix(processed_data)
+            opt_model = load_pickle_model("xgb_loanAmountOptimiser.pkl")
             
             # Predict optimized loan amount
-            optimized_amt = opt_model.predict(dmatrix_data)[0]
+            optimized_amt = opt_model.predict(processed_data)[0]
 
             # Add to response
             result["optimized_loan_amnt"] = max(int(round(optimized_amt)), 200)
