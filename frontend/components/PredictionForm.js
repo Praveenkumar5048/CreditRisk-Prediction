@@ -28,7 +28,7 @@ export default function PredictionForm({ onSubmit, isLoading, setFormData, formD
               value={formData.person_age}
               max="85"
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-black w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
@@ -39,7 +39,7 @@ export default function PredictionForm({ onSubmit, isLoading, setFormData, formD
               name="person_income"
               value={formData.person_income}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-black w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
@@ -51,7 +51,7 @@ export default function PredictionForm({ onSubmit, isLoading, setFormData, formD
               value={formData.person_emp_length}
               max="40"
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-black w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
@@ -77,7 +77,7 @@ export default function PredictionForm({ onSubmit, isLoading, setFormData, formD
               name="loan_amnt"
               value={formData.loan_amnt}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-black w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
@@ -88,7 +88,7 @@ export default function PredictionForm({ onSubmit, isLoading, setFormData, formD
               name="loan_int_rate"
               value={formData.loan_int_rate}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-black w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
@@ -115,7 +115,7 @@ export default function PredictionForm({ onSubmit, isLoading, setFormData, formD
               value={formData.cb_person_cred_hist_length}
               onChange={handleChange}
               max="30"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-black w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
