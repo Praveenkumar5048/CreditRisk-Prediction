@@ -56,18 +56,21 @@ export default function PredictionForm({ onSubmit, isLoading, setFormData, formD
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Loan Grade (0-6)</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Credit Grade</label>
             <select
-              type="number"
               name="loan_grade"
               value={formData.loan_grade}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             >
-              {[0, 1, 2, 3, 4, 5, 6].map(grade => (
-                <option key={grade} value={grade}>{grade}</option>
-              ))}
+              <option value={0}>Grade A - Excellent</option>
+              <option value={1}>Grade B - Very Good</option>
+              <option value={2}>Grade C - Good</option>
+              <option value={3}>Grade D - Fair</option>
+              <option value={4}>Grade E - Poor</option>
+              <option value={5}>Grade F - Very Poor</option>
+              <option value={6}>Grade G - Worst</option>
             </select>
           </div>
           <div>
