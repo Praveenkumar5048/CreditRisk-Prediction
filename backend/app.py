@@ -66,6 +66,10 @@ def analyze_data():
     try:
         input_data = request.json
 
+        # Change loan amount and person income to dollors
+        input_data["loan_amnt"] = input_data["loan_amnt"] / 85
+        input_data["person_income"] = input_data["person_income"] / 85
+
         # Calculate loan_percent_income if not provided
         if input_data.get("loan_percent_income") is None:
             input_data["loan_percent_income"] = input_data["loan_amnt"] / input_data["person_income"]
@@ -73,7 +77,6 @@ def analyze_data():
         # Preprocess input data (including one-hot encoding, etc.)
         processed_data = preprocess_input(input_data)
 
-        # Use regular DataFrame for first model (no DMatrix needed)
         prediction = model.predict(processed_data)
         probability = model.predict_proba(processed_data)
 
@@ -90,7 +93,8 @@ def analyze_data():
             
             # Predict optimized loan amount
             optimized_amt = opt_model.predict(processed_data)[0]
-
+            optimized_amt = optimized_amt * 85  # Convert back to original scale
+            
             # Add to response
             result["optimized_loan_amnt"] = max(int(round(optimized_amt)), 200)
 

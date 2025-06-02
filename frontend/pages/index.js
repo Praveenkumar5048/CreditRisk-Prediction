@@ -48,8 +48,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Head>
-        <title>Credit Risk Prediction | NITK</title>
-        <meta name="description" content="Credit Risk prediction model - IT464 Course Project" />
+        <title>Credit Risk Prediction </title>
+        <meta name="description" content="Credit Risk prediction model" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -99,7 +99,7 @@ export default function Home() {
       </main>
 
       <footer className="max-w-4xl mx-auto p-4 text-center text-gray-500 text-sm mt-12">
-        <p>© 2025 Department of Information Technology, NITK Surathkal</p>
+        <p>© 2025 All rights reserved | Made with love by praveen</p>
       </footer>
     </div>
   );

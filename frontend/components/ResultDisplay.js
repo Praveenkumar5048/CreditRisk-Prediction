@@ -37,7 +37,7 @@ export default function ResultDisplay({ result }) {
             <p className="text-blue-700 text-sm">
               💡 You may be eligible for a loan amount of:{" "}
               <span className="font-semibold ml-1">
-               ${optimized_loan_amnt}
+              ₹ {optimized_loan_amnt}
               </span>
             </p>
           </div>

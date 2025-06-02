@@ -21,7 +21,7 @@ export default function PredictionForm({ onSubmit, isLoading, setFormData, formD
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Age (years)</label>
             <input
               type="number"
               name="person_age"
@@ -33,7 +33,7 @@ export default function PredictionForm({ onSubmit, isLoading, setFormData, formD
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Annual Income ($)</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Annual Income (₹)</label>
             <input
               type="number"
               name="person_income"
@@ -71,7 +71,7 @@ export default function PredictionForm({ onSubmit, isLoading, setFormData, formD
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Loan Amount ($)</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Loan Amount (₹)</label>
             <input
               type="number"
               name="loan_amnt"
